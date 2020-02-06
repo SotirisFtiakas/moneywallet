@@ -23,9 +23,12 @@ import android.content.BroadcastReceiver;
 import android.content.Context;
 import android.content.Intent;
 import android.content.IntentFilter;
+import android.content.res.Configuration;
+import android.content.res.Resources;
 import android.os.Bundle;
 import android.support.annotation.NonNull;
 import android.support.v4.content.LocalBroadcastManager;
+import android.util.DisplayMetrics;
 import android.view.View;
 import android.widget.Button;
 
@@ -39,6 +42,8 @@ import com.oriondev.moneywallet.storage.preference.PreferenceManager;
 import com.oriondev.moneywallet.ui.activity.base.ThemedActivity;
 import com.oriondev.moneywallet.ui.view.theme.ThemedDialog;
 import com.pnikosis.materialishprogress.ProgressWheel;
+
+import java.util.Locale;
 
 /**
  * Created by andrea on 30/07/18.
@@ -56,6 +61,9 @@ public class LauncherActivity extends ThemedActivity {
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
+
+        setAppLocale("el");
+
         if (UpgradeLegacyEditionIntentService.isLegacyEditionDetected(this)) {
             setContentView(R.layout.activity_launcher_legacy_edition_upgrade);
             mProgressWheel = findViewById(R.id.progress_wheel);
@@ -101,6 +109,14 @@ public class LauncherActivity extends ThemedActivity {
                 startMainActivity();
             }
         }
+    }
+
+    private void setAppLocale(String localeCode){
+        Resources res = getResources();
+        DisplayMetrics dm = res.getDisplayMetrics();
+        Configuration conf = res.getConfiguration();
+        conf.setLocale(new Locale(localeCode.toLowerCase()));
+        res.updateConfiguration(conf,dm);
     }
 
     @Override
