@@ -25,7 +25,7 @@ import android.content.Intent;
 import android.net.Uri;
 import android.os.Parcel;
 import android.os.Parcelable;
-import android.support.v4.content.FileProvider;
+import androidx.core.content.FileProvider;
 import android.text.TextUtils;
 
 import com.oriondev.moneywallet.R;
@@ -156,7 +156,7 @@ public class Attachment implements Parcelable, Identifiable {
     }
 
     public Uri getUri(Context context) {
-        String authority = "com.oriondev.moneywallet.storage.file";
+        String authority = context.getPackageName() + ".storage.file";
         File folder = new File(context.getExternalFilesDir(null), FOLDER_NAME);
         File attachment = new File(folder, mFile);
         return FileProvider.getUriForFile(context, authority, attachment);

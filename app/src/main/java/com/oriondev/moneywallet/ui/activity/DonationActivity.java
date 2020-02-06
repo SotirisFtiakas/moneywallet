@@ -26,11 +26,11 @@ import android.content.Context;
 import android.content.Intent;
 import android.net.Uri;
 import android.os.Bundle;
-import android.support.annotation.NonNull;
-import android.support.annotation.Nullable;
-import android.support.design.widget.Snackbar;
-import android.support.v4.app.LoaderManager;
-import android.support.v4.content.Loader;
+import androidx.annotation.NonNull;
+import androidx.annotation.Nullable;
+import com.google.android.material.snackbar.Snackbar;
+import androidx.loader.app.LoaderManager;
+import androidx.loader.content.Loader;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
@@ -122,7 +122,7 @@ public class DonationActivity extends SinglePanelActivity implements LoaderManag
             mDonationOptionThreeButton.setText(optionThree.getString("name"));
             // register listeners for each donation option
             registerCryptoAddress(mDonationOptionOneButton, optionOne.getString("crypto_scheme"), optionOne.getString("crypto_link"));
-            registerCryptoAddress(mDonationOptionTwoButton, optionTwo.getString("crypto_scheme"), optionTwo.getString("crypto_link"));
+            registerPaypalAddress(mDonationOptionTwoButton, optionTwo.getString("url"));
             registerCryptoAddress(mDonationOptionThreeButton, optionThree.getString("crypto_scheme"), optionThree.getString("crypto_link"));
             // setup the non-monetary donation options
             registerShareAction(mShareActionLayout, nonMonetary.getString("share_link"));
@@ -160,6 +160,22 @@ public class DonationActivity extends SinglePanelActivity implements LoaderManag
                                     Snackbar.LENGTH_LONG)
                                 .show();
                     }
+                }
+            }
+
+        });
+    }
+
+    private void registerPaypalAddress(Button button, final String url) {
+        button.setOnClickListener(new View.OnClickListener() {
+
+            @Override
+            public void onClick(View view) {
+                try {
+                    Uri uri = Uri.parse(url);
+                    startActivity(new Intent(Intent.ACTION_VIEW, uri));
+                } catch (ActivityNotFoundException ignore) {
+                    // no activity found to open the url
                 }
             }
 
