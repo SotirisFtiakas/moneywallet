@@ -65,6 +65,7 @@ public class UtilitySettingFragment extends PreferenceFragmentCompat {
     private ThemedInputPreference mExchangeRateCustomApiKey;
     private Preference mExchangeRateUpdatePreference;
     private Preference mCurrencyManagementPreference;
+    private Preference mLanguagePreference;
 
     @Override
     public void onCreate(Bundle savedInstanceState) {
@@ -96,6 +97,7 @@ public class UtilitySettingFragment extends PreferenceFragmentCompat {
         mExchangeRateCustomApiKey = (ThemedInputPreference) findPreference("exchange_rate_api_key");
         mExchangeRateUpdatePreference = findPreference("exchange_rate_update");
         mCurrencyManagementPreference = findPreference("currency_management");
+        mLanguagePreference = findPreference("change_language");
     }
 
     @Override
@@ -243,6 +245,20 @@ public class UtilitySettingFragment extends PreferenceFragmentCompat {
 
         });
         mCurrencyManagementPreference.setOnPreferenceClickListener(new Preference.OnPreferenceClickListener() {
+
+            @Override
+            public boolean onPreferenceClick(Preference preference) {
+                Activity activity = getActivity();
+                if (activity != null) {
+                    Intent intent = new Intent(activity, CurrencyListActivity.class);
+                    intent.putExtra(CurrencyListActivity.ACTIVITY_MODE, CurrencyListActivity.CURRENCY_MANAGER);
+                    startActivity(intent);
+                }
+                return false;
+            }
+
+        });
+        mLanguagePreference.setOnPreferenceClickListener(new Preference.OnPreferenceClickListener() {
 
             @Override
             public boolean onPreferenceClick(Preference preference) {

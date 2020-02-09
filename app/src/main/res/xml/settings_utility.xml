@@ -67,4 +67,15 @@
 
     </com.oriondev.moneywallet.ui.preference.ThemedPreferenceCategory>
 
+    <!--Added Language Button-->
+
+    <com.oriondev.moneywallet.ui.preference.ThemedPreferenceCategory
+        android:title="@string/languages_button_title" >
+
+        <com.oriondev.moneywallet.ui.preference.ThemedListPreference
+            android:key="change_language"
+            android:title="@string/change_language"/>   <!--EDW-->
+
+    </com.oriondev.moneywallet.ui.preference.ThemedPreferenceCategory>
+
 </android.support.v7.preference.PreferenceScreen>

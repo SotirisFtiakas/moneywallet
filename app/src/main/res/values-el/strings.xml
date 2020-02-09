@@ -701,4 +701,8 @@
     <string name="activity_donation_action_contribute_content">"Ο κώδικας είναι δημόσιος και όλοι μπορούν να συνεισφέρουν"</string>
     <string name="activity_donation_final_content">"Κάθε συνεισφορά, χρηματική είτε μη-χρηματική, είναι το ίδιο σημαντική και ουσιώδης για εμένα και την εφαρμογή. Ελπίζω να την ευχαριστηθείτε και ευχαριστώ ξανά που επιλέγετε να χρησιμοποιείτε αυτή την εφαρμογή!"</string>
 
+    <!--Language-->
+    <string name="languages_button_title">Γλώσσες</string>
+    <string name="change_language">Αλλαγή γλώσσας</string>
+
 </resources>

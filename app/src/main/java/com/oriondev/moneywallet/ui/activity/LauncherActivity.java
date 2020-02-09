@@ -62,8 +62,6 @@ public class LauncherActivity extends ThemedActivity {
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
 
-        setAppLocale("el");
-
         if (UpgradeLegacyEditionIntentService.isLegacyEditionDetected(this)) {
             setContentView(R.layout.activity_launcher_legacy_edition_upgrade);
             mProgressWheel = findViewById(R.id.progress_wheel);
@@ -109,14 +107,6 @@ public class LauncherActivity extends ThemedActivity {
                 startMainActivity();
             }
         }
-    }
-
-    private void setAppLocale(String localeCode){
-        Resources res = getResources();
-        DisplayMetrics dm = res.getDisplayMetrics();
-        Configuration conf = res.getConfiguration();
-        conf.setLocale(new Locale(localeCode.toLowerCase()));
-        res.updateConfiguration(conf,dm);
     }
 
     @Override
