@@ -45,6 +45,7 @@ import com.oriondev.moneywallet.service.AbstractCurrencyRateDownloadIntentServic
 import com.oriondev.moneywallet.storage.preference.PreferenceManager;
 import com.oriondev.moneywallet.ui.activity.CurrencyListActivity;
 import com.oriondev.moneywallet.ui.activity.LockActivity;
+import com.oriondev.moneywallet.ui.activity.base.LanguageListActivity;
 import com.oriondev.moneywallet.ui.preference.ThemedInputPreference;
 import com.oriondev.moneywallet.ui.preference.ThemedListPreference;
 import com.oriondev.moneywallet.utils.DateFormatter;
@@ -264,8 +265,8 @@ public class UtilitySettingFragment extends PreferenceFragmentCompat {
             public boolean onPreferenceClick(Preference preference) {
                 Activity activity = getActivity();
                 if (activity != null) {
-                    Intent intent = new Intent(activity, CurrencyListActivity.class);
-                    intent.putExtra(CurrencyListActivity.ACTIVITY_MODE, CurrencyListActivity.CURRENCY_MANAGER);
+                    Intent intent = new Intent(activity, LanguageListActivity.class);
+                    intent.putExtra(LanguageListActivity.ACTIVITY_MODE, LanguageListActivity.LANGUAGE_MANAGER);
                     startActivity(intent);
                 }
                 return false;

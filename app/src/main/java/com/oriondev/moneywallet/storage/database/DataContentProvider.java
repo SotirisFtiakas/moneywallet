@@ -69,6 +69,8 @@ public class DataContentProvider extends ContentProvider {
     public static final Uri CONTENT_PEOPLE = Uri.parse("content://" + AUTHORITY + "/people");
     public static final Uri CONTENT_ATTACHMENTS = Uri.parse("content://" + AUTHORITY + "/attachments");
 
+    public static final Uri CONTENT_LANGUAGES = Uri.parse("content://" + AUTHORITY + "/languages");
+
     private static final int CURRENCY_LIST = 1;
     private static final int WALLET_LIST = 2;
     private static final int TRANSACTION_LIST = 3;
@@ -117,6 +119,11 @@ public class DataContentProvider extends ContentProvider {
     private static final int EVENT_TRANSACTION_LIST = 43;
     private static final int PLACE_TRANSACTION_LIST = 44;
     private static final int PERSON_TRANSACTION_LIST = 45;
+
+    private static final int LANGUAGE_LIST = 46;
+    private static final int LANGUAGE_ITEM = 47;
+
+
 
     private static final UriMatcher mUriMatcher = createUriMatcher();
 
@@ -167,6 +174,8 @@ public class DataContentProvider extends ContentProvider {
         matcher.addURI(AUTHORITY, "people/#/transactions", PERSON_TRANSACTION_LIST);
         matcher.addURI(AUTHORITY, "attachments", ATTACHMENT_LIST);
         matcher.addURI(AUTHORITY, "attachments/#", ATTACHMENT_ITEM);
+        matcher.addURI(AUTHORITY, "languages", LANGUAGE_LIST);          //path??
+        matcher.addURI(AUTHORITY, "languages/#", LANGUAGE_ITEM);
         return matcher;
     }
 
@@ -482,6 +491,14 @@ public class DataContentProvider extends ContentProvider {
                 cursor = new MultiUriCursorWrapper(mDatabase.getAttachment(ContentUris.parseId(uri), projection));
                 cursor.setNotificationUri(getContentResolver(), uri);
                 break;
+            case LANGUAGE_ITEM:
+                cursor = new MultiUriCursorWrapper(mDatabase.getLanguage(ContentUris.parseId(uri), projection));
+                cursor.setNotificationUri(getContentResolver(), uri);
+                break;
+            case LANGUAGE_LIST:
+                cursor = new MultiUriCursorWrapper(mDatabase.getLanguages(projection, selection, selectionArgs, sortOrder));
+                cursor.setNotificationUri(getContentResolver(), CONTENT_LANGUAGES);
+                break;
         }
         return cursor;
     }
@@ -580,6 +597,10 @@ public class DataContentProvider extends ContentProvider {
                 return "vnd.android.cursor.dir/vnd.com.oriondev.moneywallet.storage.attachment";
             case ATTACHMENT_ITEM:
                 return "vnd.android.cursor.item/vnd.com.oriondev.moneywallet.storage.attachment";
+            case LANGUAGE_LIST:
+                return "vnd.android.cursor.dir/vnd.com.oriondev.moneywallet.storage.language";
+            case LANGUAGE_ITEM:
+                return "vnd.android.cursor.item/vnd.com.oriondev.moneywallet.storage.language";
         }
         return null;
     }

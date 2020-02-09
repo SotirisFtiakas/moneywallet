@@ -346,6 +346,13 @@ package com.oriondev.moneywallet.storage.database;
         /*package-local*/ static final int EXPENSE = 0;
     }
 
+    /*package-local*/ static final class Language extends BaseTable {
+        /*package-local*/ static final String TABLE = "languages";
+        /*package-local*/ static final String ID = "language_id";
+        /*package-local*/ static final String NAME = "language_name";
+
+    }
+
     /*package-local*/ static final String CREATE_TABLE_CURRENCY = "CREATE TABLE " + Currency.TABLE + " (" +
             Currency.ISO + " TEXT PRIMARY KEY, " +
             Currency.NAME + " TEXT NOT NULL, " +
@@ -400,6 +407,11 @@ package com.oriondev.moneywallet.storage.database;
             Event.UUID + " TEXT NOT NULL UNIQUE, " +
             Event.LAST_EDIT + " INTEGER NOT NULL, " +
             Event.DELETED + " INTEGER NOT NULL DEFAULT 0 " +
+            ")";
+
+    /*package-local*/ static final String CREATE_TABLE_LANGUAGE = "CREATE TABLE " + Language.TABLE + " (" +
+            Language.ID + " INTEGER PRIMARY KEY AUTOINCREMENT, " +
+            Language.NAME + " TEXT NOT NULL, " +
             ")";
 
     /*package-local*/ static final String CREATE_TABLE_PLACE = "CREATE TABLE " + Place.TABLE + " (" +

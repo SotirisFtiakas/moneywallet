@@ -66,6 +66,7 @@ public class SyncContentProvider extends ContentProvider {
     public static final Uri CONTENT_ATTACHMENT = Uri.parse("content://" + AUTHORITY + "/attachments");
     public static final Uri CONTENT_TRANSACTION_ATTACHMENT = Uri.parse("content://" + AUTHORITY + "/transaction_attachments");
     public static final Uri CONTENT_TRANSFER_ATTACHMENT = Uri.parse("content://" + AUTHORITY + "/transfer_attachments");
+    public static final Uri CONTENT_LANGUAGES = Uri.parse("content://" + AUTHORITY + "/languages");
 
     private static final int TABLE_CURRENCIES = 1;
     private static final int TABLE_WALLETS = 2;
@@ -90,6 +91,7 @@ public class SyncContentProvider extends ContentProvider {
     private static final int TABLE_ATTACHMENTS = 21;
     private static final int TABLE_TRANSACTION_ATTACHMENTS = 22;
     private static final int TABLE_TRANSFER_ATTACHMENTS = 23;
+    private static final int TABLE_LANGUAGES = 24;
 
     private static final UriMatcher mUriMatcher = createUriMatcher();
 
@@ -118,6 +120,7 @@ public class SyncContentProvider extends ContentProvider {
         matcher.addURI(AUTHORITY, "attachments", TABLE_ATTACHMENTS);
         matcher.addURI(AUTHORITY, "transaction_attachments", TABLE_TRANSACTION_ATTACHMENTS);
         matcher.addURI(AUTHORITY, "transfer_attachments", TABLE_TRANSFER_ATTACHMENTS);
+        matcher.addURI(AUTHORITY, "languages", TABLE_LANGUAGES);
         return matcher;
     }
 
@@ -178,6 +181,8 @@ public class SyncContentProvider extends ContentProvider {
                 return Schema.TransactionAttachment.TABLE;
             case TABLE_TRANSFER_ATTACHMENTS:
                 return Schema.TransferAttachment.TABLE;
+            case TABLE_LANGUAGES:
+                return Schema.Language.TABLE;
             default:
                 return null;
         }

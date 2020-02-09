@@ -110,6 +110,7 @@ import java.util.UUID;
         db.execSQL(Schema.CREATE_TABLE_ATTACHMENT);
         db.execSQL(Schema.CREATE_TABLE_TRANSACTION_ATTACHMENT);
         db.execSQL(Schema.CREATE_TABLE_TRANSFER_ATTACHMENT);
+        db.execSQL(Schema.CREATE_TABLE_LANGUAGE);
         // create all triggers to ensure data consistency
         // TODO [low] create triggers
         // insert default items
@@ -4372,6 +4373,32 @@ import java.util.UUID;
             return getWritableDatabase().delete(Schema.Attachment.TABLE, where, whereArgs);
         }
     }
+
+
+    /**
+     * This method is called by the content provider when the user is querying all the languages.
+     *
+     * @param projection column names that are requested to be part of the cursor.
+     * @param selection string that may contains additional filters for the query.
+     * @param selectionArgs string array that may contains the arguments for the selection string.
+     * @param sortOrder string that may contains column name to use to sort the cursor.
+     * @return a cursor with zero or more rows.
+     */
+    /*package-local*/ Cursor getLanguages(String[] projection, String selection, String[] selectionArgs, String sortOrder) {
+        String subQuery = "SELECT " +
+                Schema.Language.ID + " AS " + Contract.Language.ID + ", " +
+                Schema.Language.NAME + " AS " + Contract.Language.NAME + ", " +
+                Schema.Language.TABLE + " WHERE " + Schema.Language.DELETED + " = 0";
+        return queryFrom(subQuery, projection, selection, selectionArgs, sortOrder);
+    }
+
+    /*package-local*/ Cursor getLanguage(long placeId, String[] projection) {
+        String selection = Schema.Language.ID + " = ?";
+        String[] selectionArgs = new String[]{String.valueOf(placeId)};
+        return getLanguages(projection, selection, selectionArgs, null);
+    }
+
+
 
     /**
      * This is an internal method used to prepare a query over an existing sub query as table.

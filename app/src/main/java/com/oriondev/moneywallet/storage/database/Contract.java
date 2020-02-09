@@ -433,6 +433,11 @@ public class Contract {
         public static final String TAG = Schema.Place.TAG;
     }
 
+    public static final class Language {
+        public static final String ID = Schema.Language.ID;
+        public static final String NAME = Schema.Language.NAME;
+    }
+
     public static final class Person {
         public static final String ID = Schema.Person.ID;
         public static final String NAME = Schema.Person.NAME;
